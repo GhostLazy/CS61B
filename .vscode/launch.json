@@ -1,0 +1,43 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "hw00",
+            "request": "launch",
+            "mainClass": "hw00",
+            "projectName": "Java_feff7972"
+        },
+        {
+            "type": "java",
+            "name": "GraphDBLauncher",
+            "request": "launch",
+            "mainClass": "proj3.src.main.java.GraphDBLauncher",
+            "projectName": "Java_feff7972"
+        },
+        {
+            "type": "java",
+            "name": "MapServer",
+            "request": "launch",
+            "mainClass": "proj3.src.main.java.MapServer",
+            "projectName": "Java_feff7972"
+        },
+        {
+            "type": "java",
+            "name": "CSCourseDB",
+            "request": "launch",
+            "mainClass": "proj3.src.main.java.example.CSCourseDB",
+            "projectName": "Java_feff7972"
+        }
+    ]
+}
