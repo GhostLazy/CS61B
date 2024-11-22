@@ -30,7 +30,6 @@ public class LinkedListDeque<T> {
 
     public void addFirst(T item) {
         sentinel.next = new Node(sentinel, item, sentinel.next);
-        last = last.next;
         size += 1;
     }
 
