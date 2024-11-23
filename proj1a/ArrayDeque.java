@@ -35,7 +35,7 @@ public class ArrayDeque<T> {
             newArray[i] = get(i);
         }
         length *= 2;
-        first = length;
+        first = length - 1;
         last = size;
         array = newArray;
     }
@@ -46,7 +46,7 @@ public class ArrayDeque<T> {
             newArray[i] = get(i);
         }
         length /= 2;
-        first = length;
+        first = length - 1;
         last = size;
         array = newArray;
     }

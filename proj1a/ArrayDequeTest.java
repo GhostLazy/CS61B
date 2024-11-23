@@ -30,6 +30,13 @@ public class ArrayDequeTest {
         ArrayDeque<Integer> dq = new ArrayDeque<>();
         dq.addFirst(1);
         dq.addLast(8);
-        assertEquals(8, dq.get(1));
+        dq.addLast(7);
+        dq.addFirst(2);
+        dq.addLast(6);
+        dq.addLast(5);
+        dq.addFirst(3);
+        dq.addLast(4);
+        dq.addFirst(0);
+        assertEquals(0, dq.get(9));
     }
 }
