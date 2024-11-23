@@ -13,18 +13,6 @@ public class ArrayDeque<T> {
         last = 5;
     }
 
-    public ArrayDeque(ArrayDeque other) {
-        array = (T []) new Object[other.length];
-        size = other.size;
-        length = other.length;
-        first = length;
-        last = size;
-
-        for (int i = 0; i < size; i++) {
-            array[i] = (T) other.get(i);
-        }
-    }
-
     private int minusOne(int x) {
         int temp = x - 1;
         if (temp >= 0) {
@@ -42,23 +30,25 @@ public class ArrayDeque<T> {
     }
 
     private void grow() {
-        T[] new_array = (T []) new Object[length * 2];
-        System.arraycopy(array, 0, new_array, 0, last);
-        System.arraycopy(array, last, new_array, last + length, length - last);
-        first += length;
+        T[] newArray = (T []) new Object[length * 2];
+        for (int i = 0; i < size; i++) {
+            newArray[i] = get(i);
+        }
         length *= 2;
-        array = new_array;
+        first = length;
+        last = size;
+        array = newArray;
     }
 
     private void shrink() {
-        T[] new_array = (T []) new Object[length / 2];
+        T[] newArray = (T []) new Object[length / 2];
         for (int i = 0; i < size; i++) {
-            new_array[i] = get(i);
+            newArray[i] = get(i);
         }
         length /= 2;
         first = length;
         last = size;
-        array = new_array;
+        array = newArray;
     }
 
     public void addFirst(T item) {
@@ -88,6 +78,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         first = plusOne(first);
         T removed = array[first];
         array[first] = null;
@@ -99,6 +92,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         last = minusOne(last);
         T removed = array[last];
         array[last] = null;
@@ -114,5 +110,11 @@ public class ArrayDeque<T> {
             return null;
         }
         return array[(first + index + 1) % length];
+    }
+
+    public void printDeque() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(get(i) + " ");
+        }
     }
 }
