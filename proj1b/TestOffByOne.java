@@ -9,7 +9,7 @@ public class TestOffByOne {
 
     // Your tests go here.
     **/
-    static OffByOne offByOne = new OffByOne();
+    static CharacterComparator offByOne = new OffByOne();
 
     @Test
     public void testEqualChars() {
