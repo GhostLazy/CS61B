@@ -37,6 +37,6 @@ public class ArrayDequeTest {
         dq.addFirst(3);
         dq.addLast(4);
         dq.addFirst(0);
-        assertEquals(0, dq.get(9));
+        assertEquals(4, dq.get(8));
     }
 }
