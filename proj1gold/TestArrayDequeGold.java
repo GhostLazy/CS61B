@@ -28,12 +28,12 @@ public class TestArrayDequeGold {
             if (num < 0.5) {
                 Integer expected = ads.removeFirst();
                 Integer actual = sad.removeFirst();
-                log.append("sad.removeFirst()");
+                log.append("sad.removeFirst()\n");
                 assertEquals(log.toString(), expected, actual);
             } else {
                 Integer expected = ads.removeLast();
                 Integer actual = sad.removeLast();
-                log.append("sad.removeLast()");
+                log.append("sad.removeLast()\n");
                 assertEquals(log.toString(), expected, actual);
             }
         }
