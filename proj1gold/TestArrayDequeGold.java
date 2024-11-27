@@ -14,10 +14,12 @@ public class TestArrayDequeGold {
                 sad.addFirst(i);
                 ads.addFirst(i);
                 log.append("sad.addFirst(").append(i).append(");\n");
+                assertEquals(log.toString(), ads.get(0), sad.get(0));
             } else {
                 sad.addLast(i);
                 ads.addLast(i);
                 log.append("sad.addLast(").append(i).append(");\n");
+                assertEquals(log.toString(), ads.get(ads.size() - 1), sad.get(sad.size() - 1));
             }
         }
 
@@ -26,11 +28,13 @@ public class TestArrayDequeGold {
             if (num < 0.5) {
                 Integer expected = ads.removeFirst();
                 Integer actual = sad.removeFirst();
-                assertEquals(log + "sad.removeFirst()", expected, actual);
+                log.append("sad.removeFirst()");
+                assertEquals(log.toString(), expected, actual);
             } else {
                 Integer expected = ads.removeLast();
                 Integer actual = sad.removeLast();
-                assertEquals(log + "sad.removeLast()", expected, actual);
+                log.append("sad.removeLast()");
+                assertEquals(log.toString(), expected, actual);
             }
         }
     }
