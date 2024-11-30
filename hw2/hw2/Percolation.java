@@ -20,13 +20,13 @@ public class Percolation {
         numberOfOpenSites = 0;
     }
 
-    public void validateRange(int row, int col) {
+    private void validateRange(int row, int col) {
         if (row < 0 || row >= sideLength || col < 0 || col >= sideLength) {
             throw new IndexOutOfBoundsException();
         }
     }
 
-    public void dfs(int row, int col) {
+    private void dfs(int row, int col) {
         if (row < 0 || row >= sideLength || col < 0 || col >= sideLength || grid[row][col] != 1) {
             return;
         }
@@ -82,17 +82,20 @@ public class Percolation {
             }
         }
         for (int i = 0; i < sideLength; i++) {
-            if (grid[sideLength - 1][i] == 2) {
+            if (isFull(sideLength - 1, i)) {
                 return true;
             }
         }
-        for (int i = 0; i < sideLength; i++) {
-            for (int j = 0; j < sideLength; j++) {
-                if (grid[i][j] == 2) {
-                    grid[i][j] = 1;
-                }
-            }
-        }
+//        for (int i = 0; i < sideLength; i++) {
+//            for (int j = 0; j < sideLength; j++) {
+//                if (grid[i][j] == 2) {
+//                    grid[i][j] = 1;
+//                }
+//            }
+//        }
         return false;
+    }
+
+    public static void main(String[] args) {
     }
 }
