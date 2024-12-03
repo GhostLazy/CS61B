@@ -11,7 +11,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     private class Node {
         /* (K, V) pair stored in this Node. */
-        private K key;
+        private final K key;
         private V value;
 
         /* Children of this Node. */
@@ -32,7 +32,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         this.clear();
     }
 
-    /* Removes all of the mappings from this map. */
+    /* Removes all the mappings from this map. */
     @Override
     public void clear() {
         root = null;
