@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import lab9.BSTMap;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Tests by Brendan Hu, Spring 2015, revised for 2018 by Josh Hug
  */
@@ -86,7 +89,26 @@ public class TestBSTMap {
         assertTrue(b.get("hi") != null);
     }
 
-    public static void main(String[] args) {
-        jh61b.junit.TestRunner.runTests(TestBSTMap.class);
+    @Test
+    public void sanitySetTest() {
+        BSTMap<String, Integer> b = new BSTMap<>();
+        b.put("hi", 1);
+        b.put("starChild", 5);
+        Set<String> expect = new HashSet<>();
+        expect.add("hi");
+        expect.add("starChild");
+        assertEquals(expect, b.keySet());
+    }
+
+    @Test
+    public void sanityRemoveTest() {
+        BSTMap<String, Integer> b = new BSTMap<>();
+        b.put("hi", 1);
+        b.put("starChild", 5);
+        b.remove("hi");
+        b.remove("starChild", 4);
+        assertFalse("hi", b.containsKey("hi"));
+        assertTrue("starChild", b.containsKey("starChild"));
+        assertEquals(1, b.size());
     }
 }

@@ -8,11 +8,11 @@ public class Percolation {
     private final boolean[][] grid;
     private final int N;
     private int numberOfOpenSites;
-    private int topSite;
-    private int bottomSite;
-    private WeightedQuickUnionUF sites;
+    private final int topSite;
+    private final int bottomSite;
+    private final WeightedQuickUnionUF sites;
     // sites without bottomSite
-    private WeightedQuickUnionUF sites2;
+    private final WeightedQuickUnionUF sites2;
 
     public Percolation(int N) {
         if (N <= 0) {
@@ -72,6 +72,7 @@ public class Percolation {
         }
         grid[row][col] = true;
         numberOfOpenSites += 1;
+        // Question: how to prove that all sites can be labeled by labeling the opened site and its four neighbor sites?
         unionOpenNeighbor(row, col, row - 1, col);
         unionOpenNeighbor(row, col, row + 1, col);
         unionOpenNeighbor(row, col, row, col - 1);
@@ -89,6 +90,7 @@ public class Percolation {
         if (!isOpen(row, col)) {
             return false;
         }
+        // prevent backwash
         return sites2.connected(xyTo1D(row, col), topSite);
     }
 
