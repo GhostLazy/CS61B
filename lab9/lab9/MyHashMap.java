@@ -81,6 +81,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
             resize(size * 2);
         }
         int hashCode = hash(key);
+        // why it is not allowed to directly plus size by 1?
         size -= buckets[hashCode].size;
         buckets[hashCode].put(key, value);
         size += buckets[hashCode].size;

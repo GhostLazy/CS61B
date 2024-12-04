@@ -95,7 +95,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             throw new IllegalArgumentException();
         }
         if (value == null) {
-            throw new UnsupportedOperationException();
+            throw new IllegalArgumentException();
         }
         root = putHelper(key, value, root);
     }
