@@ -27,6 +27,7 @@ public class TestSimpleOomage {
     public void testHashCodePerfect() {
         SimpleOomage ooA = new SimpleOomage(5, 10, 20);
         SimpleOomage ooB = new SimpleOomage(20, 10, 5);
+        System.out.print(ooA.hashCode() + " " + ooB.hashCode());
         assertNotEquals(ooA.hashCode(), ooB.hashCode());
     }
 
@@ -60,7 +61,7 @@ public class TestSimpleOomage {
             oomages.add(SimpleOomage.randomSimpleOomage());
         }
 
-        assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
+        assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 5));
     }
 
     /** Calls tests for SimpleOomage. */

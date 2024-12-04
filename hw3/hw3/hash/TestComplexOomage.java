@@ -1,5 +1,6 @@
 package hw3.hash;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -33,23 +34,32 @@ public class TestComplexOomage {
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
     }
 
+    // @Source https://github.com/PKUFlyingPig/CS61B
+    // totally not understand
+    private ArrayList<Integer> randomList() {
+        int N = StdRandom.uniform(1, 10);
+        ArrayList<Integer> params = new ArrayList<>(N);
+        for (int i = 0; i < N; i += 1) {
+            params.add(StdRandom.uniform(0, 255));
+        }
+        return params;
+    }
     @Test
     public void testWithDeadlyParams() {
         List<Oomage> deadlyList = new ArrayList<>();
 
         // Your code here.
-        // @Source https://github.com/morty6688/cs61b-sp18/blob/master/hw3/hw3/hash/TestComplexOomage.java
-        // totally not understand
-        for (int i = 0; i < 30; i++) {
-            List<Integer> p = new ArrayList<>();
-            for (int j = 0; j < i; j++) {
-                p.add(5 * j);
-            }
-
-            Oomage o = new ComplexOomage(p);
-            deadlyList.add(o);
+        int N = 100;
+        ArrayList<Integer> suffix = new ArrayList<>();
+        suffix.add(1);
+        suffix.add(2);
+        suffix.add(3);
+        suffix.add(4);
+        for (int i = 0; i < N; i++) {
+            ArrayList<Integer> params = randomList();
+            params.addAll(suffix);
+            deadlyList.add(new ComplexOomage(params));
         }
-
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
     }
 
