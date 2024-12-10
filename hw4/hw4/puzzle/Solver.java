@@ -1,13 +1,17 @@
 package hw4.puzzle;
 import edu.princeton.cs.algs4.MinPQ;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class Solver {
     private class SearchNode implements Comparable<SearchNode> {
-        public WorldState state;
-        public int moves;
-        public SearchNode prev;
+        private final WorldState state;
+        private final int moves;
+        private final SearchNode prev;
         public SearchNode(WorldState s, int m, SearchNode p) {
             state = s;
             moves = m;
@@ -55,6 +59,10 @@ public class Solver {
     }
 
     public Iterable<WorldState> solution() {
-        return solution.reversed();
+        List<WorldState> res = new ArrayList<>();
+        for (int i = moves() - 1; i >= 0; i--) {
+            res.add(solution.get(i));
+        }
+        return res;
     }
 }

@@ -140,9 +140,10 @@ public class Board implements WorldState {
         if (this == y) {
             return true;
         }
-        if (!(y instanceof Board b)) {
+        if (!(y instanceof Board)) {
             return false;
         }
+        Board b = (Board) y;
         if (this.N != b.N) {
             return false;
         }
