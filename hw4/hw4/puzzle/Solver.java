@@ -60,7 +60,7 @@ public class Solver {
 
     public Iterable<WorldState> solution() {
         List<WorldState> res = new ArrayList<>();
-        for (int i = moves() - 1; i >= 0; i--) {
+        for (int i = solution.size() - 1; i >= 0; i--) {
             res.add(solution.get(i));
         }
         return res;
