@@ -2,7 +2,6 @@ package hw4.puzzle;
 
 import java.util.Set;
 import java.util.HashSet;
-import edu.princeton.cs.algs4.StdOut;
 
 /** Ultra simple puzzle useful for debugging. The puzzle has a state equal to a single
   * alphabetical lower case character. The goal is 'z'. Neighbors are the characters
