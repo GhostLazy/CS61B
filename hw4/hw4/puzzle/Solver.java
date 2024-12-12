@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 
 public class Solver {
@@ -18,16 +19,16 @@ public class Solver {
             prev = p;
         }
 
-        private int getPriority() {
-            if (!cachePriority.containsKey(this.state)) {
-                cachePriority.put(this.state, this.moves + this.state.estimatedDistanceToGoal());
+        private int getPriority(SearchNode sn) {
+            if (!cachePriority.containsKey(sn.state)) {
+                cachePriority.put(sn.state, sn.state.estimatedDistanceToGoal());
             }
-            return cachePriority.get(this.state);
+            return cachePriority.get(sn.state) + sn.moves;
         }
 
         @Override
         public int compareTo(SearchNode other) {
-            return (this.getPriority()) - (other.getPriority());
+            return (getPriority(this)) - (getPriority(other));
         }
     }
 
@@ -35,10 +36,10 @@ public class Solver {
     private final Map<WorldState, Integer> cachePriority = new HashMap<>();
 
     public Solver(WorldState initial) {
-        MinPQ<SearchNode> pq = new MinPQ<>();
-        pq.insert(new SearchNode(initial, 0, null));
+        PriorityQueue<SearchNode> pq = new PriorityQueue<>();
+        pq.offer(new SearchNode(initial, 0, null));
         while (true) {
-            SearchNode x = pq.delMin();
+            SearchNode x = pq.poll();
             if (x.state.isGoal()) {
                 while (x != null) {
                     solution.add(x.state);
@@ -48,7 +49,7 @@ public class Solver {
             }
             for (WorldState y : x.state.neighbors()) {
                 if (x.prev == null || !y.equals(x.prev.state)) {
-                    pq.insert(new SearchNode(y, x.moves + 1, x));
+                    pq.offer(new SearchNode(y, x.moves + 1, x));
                 }
             }
         }

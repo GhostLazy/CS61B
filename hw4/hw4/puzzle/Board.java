@@ -1,7 +1,5 @@
 package hw4.puzzle;
 
-import edu.princeton.cs.algs4.Queue;
-
 import java.util.ArrayList;
 import java.util.List;
 
