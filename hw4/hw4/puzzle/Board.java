@@ -2,19 +2,28 @@ package hw4.puzzle;
 
 import edu.princeton.cs.algs4.Queue;
 
-//import java.util.ArrayList;
-//import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board implements WorldState {
     private final int[][] tiles;
     private final int N;
-    private final int BLANK = 0;
+    private int blankRow;
+    private int blankCol;
 
     public Board(int[][] tiles) {
         N = tiles.length;
         this.tiles = new int[N][N];
         for (int i = 0; i < N; i++) {
             System.arraycopy(tiles[i], 0, this.tiles[i], 0, N);
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (tileAt(i, j) == 0) {
+                    blankRow = i;
+                    blankCol = j;
+                }
+            }
         }
     }
 
@@ -29,76 +38,30 @@ public class Board implements WorldState {
         return N;
     }
 
-//    private int[] getPosition() {
-//        for (int i = 0; i < N; i++) {
-//            for (int j = 0; j < N; j++) {
-//                if (tileAt(i, j) == 0) {
-//                    return new int[] {i, j};
-//                }
-//            }
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public Iterable<WorldState> neighbors() {
-//        List<WorldState> neighbours = new ArrayList<>();
-//        int zeroRow = getPosition()[0];
-//        int zeroCol = getPosition()[1];
-//        int[][] DIRs = new int[][] {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-//        for (int[] DIR : DIRs) {
-//            int newRow = zeroRow + DIR[0];
-//            int newCol = zeroCol + DIR[1];
-//            if (newRow >= 0 && newRow < N && newCol >= 0 && newCol < N) {
-//                int[][] newTiles = new int[N][N];
-//                for (int i = 0; i < N; i++) {
-//                    System.arraycopy(tiles[i], 0, newTiles[i], 0, N);
-//                }
-//                newTiles[zeroRow][zeroCol] = tileAt(newRow, newCol);
-//                newTiles[newRow][newCol] = 0;
-//                neighbours.add(new Board(newTiles));
-//            }
-//        }
-//        return neighbours;
-//    }
-    /**
-     * Returns the neighbors of the current board
-     *
-     * @author <a href="http://joshh.ug/neighbors.html">...</a>
-     */
     @Override
     public Iterable<WorldState> neighbors() {
-        Queue<WorldState> neighbors = new Queue<>();
-        int hug = size();
-        int bug = -1;
-        int zug = -1;
-        for (int rug = 0; rug < hug; rug++) {
-            for (int tug = 0; tug < hug; tug++) {
-                if (tileAt(rug, tug) == BLANK) {
-                    bug = rug;
-                    zug = tug;
+        List<WorldState> neighbours = new ArrayList<>();
+        int[][] tempTiles = new int[N][N];
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                tempTiles[i][j] = tileAt(i, j);
+            }
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (Math.abs(i - blankRow) + Math.abs(j - blankCol) == 1) {
+                    int target = tileAt(i, j);
+                    tempTiles[blankRow][blankCol] = target;
+                    tempTiles[i][j] = 0;
+                    neighbours.add(new Board(tempTiles));
+                    tempTiles[i][j] = target;
+                    tempTiles[blankRow][blankCol] = 0;
                 }
             }
         }
-        int[][] ili1li1 = new int[hug][hug];
-        for (int pug = 0; pug < hug; pug++) {
-            for (int yug = 0; yug < hug; yug++) {
-                ili1li1[pug][yug] = tileAt(pug, yug);
-            }
-        }
-        for (int l11il = 0; l11il < hug; l11il++) {
-            for (int lil1il1 = 0; lil1il1 < hug; lil1il1++) {
-                if (Math.abs(-bug + l11il) + Math.abs(lil1il1 - zug) - 1 == 0) {
-                    ili1li1[bug][zug] = ili1li1[l11il][lil1il1];
-                    ili1li1[l11il][lil1il1] = BLANK;
-                    Board neighbor = new Board(ili1li1);
-                    neighbors.enqueue(neighbor);
-                    ili1li1[l11il][lil1il1] = ili1li1[bug][zug];
-                    ili1li1[bug][zug] = BLANK;
-                }
-            }
-        }
-        return neighbors;
+        return neighbours;
     }
 
     public int hamming() {

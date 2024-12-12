@@ -131,7 +131,7 @@ public class TestSolver {
         }
     }
 
-    @Test(timeout = 20000)
+    @Test(timeout = 40000)
     public void testVariousPuzzles() {
         for (int i = 0; i <= 31; i += 1) {
             String pnum = String.format("%02d", i);

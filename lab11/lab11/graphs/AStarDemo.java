@@ -17,5 +17,4 @@ public class AStarDemo {
         MazeExplorer asp = new MazeAStarPath(maze, startX, startY, targetX, targetY);
         asp.solve();
     }
-
 }

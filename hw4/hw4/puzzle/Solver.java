@@ -18,21 +18,21 @@ public class Solver {
             prev = p;
         }
 
-        private int getEDTG() {
-            if (!cacheEDTG.containsKey(this.state)) {
-                cacheEDTG.put(this.state, this.state.estimatedDistanceToGoal());
+        private int getPriority() {
+            if (!cachePriority.containsKey(this.state)) {
+                cachePriority.put(this.state, this.moves + this.state.estimatedDistanceToGoal());
             }
-            return cacheEDTG.get(this.state);
+            return cachePriority.get(this.state);
         }
 
         @Override
         public int compareTo(SearchNode other) {
-            return (this.moves + this.getEDTG()) - (other.moves + other.getEDTG());
+            return (this.getPriority()) - (other.getPriority());
         }
     }
 
     private final List<WorldState> solution = new ArrayList<>();
-    private final Map<WorldState, Integer> cacheEDTG = new HashMap<>();
+    private final Map<WorldState, Integer> cachePriority = new HashMap<>();
 
     public Solver(WorldState initial) {
         MinPQ<SearchNode> pq = new MinPQ<>();

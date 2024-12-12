@@ -13,5 +13,4 @@ public class CyclesDemo {
         MazeCycles mc = new MazeCycles(maze);
         mc.solve();
     }
-
 }
