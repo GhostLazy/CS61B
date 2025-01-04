@@ -17,7 +17,7 @@ public class CountingSort {
         // find max
         int max = Integer.MIN_VALUE;
         for (int i : arr) {
-            max = max > i ? max : i;
+            max = Math.max(max, i);
         }
 
         // gather all the counts for each value
@@ -66,7 +66,21 @@ public class CountingSort {
      * @param arr int array that will be sorted
      */
     public static int[] betterCountingSort(int[] arr) {
-        // TODO make counting sort work with arrays containing negative numbers.
-        return null;
+        int min = Integer.MAX_VALUE;
+        for (int i : arr) {
+            min = Math.min(min, i);
+        }
+
+        int[] newArr = new int[arr.length];
+        for (int i = 0; i < newArr.length; i++) {
+            newArr[i] = arr[i] - min;
+        }
+
+        int[] sorted = naiveCountingSort(newArr);
+        int[] res = new int[arr.length];
+        for (int i = 0; i < newArr.length; i++) {
+            res[i] = sorted[i] + min;
+        }
+        return res;
     }
 }

@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Class for doing Radix sort
  *
@@ -16,8 +18,16 @@ public class RadixSort {
      * @return String[] the sorted array
      */
     public static String[] sort(String[] asciis) {
-        // TODO: Implement LSD Sort
-        return null;
+        int maxlen = 0;
+        for (String item : asciis) {
+            maxlen = Math.max(maxlen, item.length());
+        }
+
+        String[] res = Arrays.copyOf(asciis, asciis.length);
+        for (int i = 0; i < maxlen; i++) {
+            sortHelperLSD(res, i);
+        }
+        return res;
     }
 
     /**
@@ -27,8 +37,30 @@ public class RadixSort {
      * @param index The position to sort the Strings on.
      */
     private static void sortHelperLSD(String[] asciis, int index) {
-        // Optional LSD helper method for required LSD radix sort
-        return;
+        int[] counts = new int[257];
+        for (String item : asciis) {
+            int len = item.length();
+            int c = len - index - 1 >= 0 ? item.charAt(len - index - 1) + 1 : 0;
+            counts[c]++;
+        }
+
+        int[] starts = new int[257];
+        int pos = 0;
+        for (int i = 0; i < 257; i++) {
+            starts[i] = pos;
+            pos += counts[i];
+        }
+
+        String[] sorted = new String[asciis.length];
+        for (String item : asciis) {
+            int len = item.length();
+            int c = len - index - 1 >= 0 ? item.charAt(len - index - 1) + 1 : 0;
+            int place = starts[c];
+            sorted[place] = item;
+            starts[c]++;
+        }
+
+        System.arraycopy(sorted, 0, asciis, 0, asciis.length);
     }
 
     /**
@@ -44,5 +76,21 @@ public class RadixSort {
     private static void sortHelperMSD(String[] asciis, int start, int end, int index) {
         // Optional MSD helper method for optional MSD radix sort
         return;
+    }
+
+    public static void main(String[] args) {
+        String[] asciis = new String[] { "56", "112", "94", "4", "9", "82", "394", "80" };
+        String[] res = RadixSort.sort(asciis);
+        for (String s : res) {
+            System.out.print(s + " ");
+        }
+
+        System.out.println();
+
+        String[] asciis2 = new String[] {"ab", "avd165", "adv62", "daf52"};
+        String[] res2 = RadixSort.sort(asciis2);
+        for (String s : res2) {
+            System.out.print(s + ",");
+        }
     }
 }
