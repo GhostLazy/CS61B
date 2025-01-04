@@ -70,8 +70,8 @@ public class CountingSort {
         int max = Integer.MIN_VALUE;
         int min = Integer.MAX_VALUE;
         for (int i : arr) {
-            max = max > i ? max : i;
-            min = min < i ? min : i;
+            max = Math.max(max, i);
+            min = Math.min(min, i);
         }
 
         // gather all the counts for each value
@@ -79,14 +79,6 @@ public class CountingSort {
         for (int i : arr) {
             counts[i - min]++;
         }
-
-        // int[] sorted = new int[arr.length];
-        // int k = 0;
-        // for (int i = 0; i < counts.length; i += 1) {
-        //     for (int j = 0; j < counts[i]; j += 1, k += 1) {
-        //         sorted[k] = i + min;
-        //     }
-        // }
 
         int[] starts = new int[max - min + 1];
         int pos = 0;
@@ -96,8 +88,7 @@ public class CountingSort {
         }
 
         int[] sorted = new int[arr.length];
-        for (int i = 0; i < arr.length; i += 1) {
-            int item = arr[i];
+        for (int item : arr) {
             int place = starts[item - min];
             sorted[place] = item;
             starts[item - min]++;
